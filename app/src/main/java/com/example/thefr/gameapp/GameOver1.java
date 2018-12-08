@@ -33,7 +33,7 @@ public class GameOver1 extends AppCompatActivity {
         startGameAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(GameOver1.this, Main4Activity.class);
+                Intent mainIntent = new Intent(GameOver1.this, MainActivity.class);
                 bgm2 = MediaPlayer.create(GameOver1.this, R.raw.scary);
                 bgm2.start();
                 bgm2.setLooping(true);
