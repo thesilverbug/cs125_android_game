@@ -21,7 +21,8 @@
         <activity android:name=".Main2Activity" />
         <activity android:name=".Main3Activity" />
         <activity android:name=".Main4Activity" />
-        <activity android:name=".Clear"></activity>
+        <activity android:name=".Clear" />
+        <activity android:name=".GameClear"></activity>
     </application>
 
 </manifest>

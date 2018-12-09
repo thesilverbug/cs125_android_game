@@ -62,8 +62,8 @@ public class level2 extends View {
         person[1] = BitmapFactory.decodeResource(getResources(), R.drawable.char2);
         darkness = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
         fence = BitmapFactory.decodeResource(getResources(), R.drawable.fence);
-        bar = BitmapFactory.decodeResource(getResources(), R.drawable.bar_tran);
-        h_bar = BitmapFactory.decodeResource(getResources(), R.drawable.h_bar_tran);
+        bar = BitmapFactory.decodeResource(getResources(), R.drawable.bar);
+        h_bar = BitmapFactory.decodeResource(getResources(), R.drawable.h_bar);
 
         backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.background2);
 
@@ -101,8 +101,8 @@ public class level2 extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         canvas.drawBitmap(backgroundImage, 0, -70, null);
+
         if (flow > 4) {
             flow = 0;
         }
@@ -112,6 +112,7 @@ public class level2 extends View {
             canvas.drawBitmap(person[0], personX, personY, null);
         }
         flow++;
+
         canvas.drawBitmap(fence, 0, -70, null);
 
         canvas.drawBitmap(bar, -125, 380, null);
@@ -228,14 +229,17 @@ public class level2 extends View {
         }
 
 
-
-
-
         canvas.drawBitmap(darkness, darkX, darkY, null);
 
     }
     //
     public boolean hitBallChecker(int x, int y, int width, int height) {
+        if (personX < x+width && x-width < (personX + person[0].getWidth()) && personY + 200 < y+height && y-height < (personY + person[0].getHeight())) {
+            return true;
+        }
+        return false;
+    }
+    public boolean chaClicker(int x, int y, int width, int height) {
         if (personX < x+width && x-width < (personX + person[0].getWidth()) && personY < y+height && y-height < (personY + person[0].getHeight())) {
             return true;
         }
@@ -246,7 +250,7 @@ public class level2 extends View {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (hitBallChecker((int) event.getX(), (int) event.getY(), 0, 0)) {
+                if (chaClicker((int) event.getX(), (int) event.getY(), 0, 0)) {
                     movingPlayer = true;
                 }
                 break;
