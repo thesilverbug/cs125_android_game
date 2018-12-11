@@ -98,15 +98,6 @@ public class level1 extends View {
         super.onDraw(canvas);
 
         canvas.drawBitmap(backgroundImage, 0, 0, null);
-        if (flow > 4) {
-            flow = 0;
-        }
-        if (flow > 2) {
-            canvas.drawBitmap(person[1], personX, personY, null);
-        } else {
-            canvas.drawBitmap(person[0], personX, personY, null);
-        }
-        flow++;
 
 
 
@@ -179,22 +170,36 @@ public class level1 extends View {
         }
         canvas.drawCircle(redX, redY, 30, redPaint);
 
+        if (flow > 4) {
+            flow = 0;
+        }
+        if (flow > 2) {
+            canvas.drawBitmap(person[1], personX, personY, null);
+        } else {
+            canvas.drawBitmap(person[0], personX, personY, null);
+        }
+        flow++;
 
         canvas.drawBitmap(darkness, darkX, darkY, null);
     }
 //
     public boolean hitBallChecker(int x, int y, int width, int height) {
-        if (personX < x+width && x-width < (personX + person[0].getWidth()) && personY < y+height && y-height < (personY + person[0].getHeight())) {
+        if (personX < x+width && x-width < (personX + person[0].getWidth()) && personY + 200 < y+height && y-height < (personY + person[0].getHeight())) {
             return true;
         }
         return false;
     }
-
+    public boolean chaClicker(int x, int y, int width, int height) {
+        if (personX < x + width && x - width < (personX + person[0].getWidth()) && personY < y + height && y - height < (personY + person[0].getHeight())) {
+            return true;
+        }
+        return false;
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (hitBallChecker((int) event.getX(), (int) event.getY(), 0, 0)) {
+                if (chaClicker((int) event.getX(), (int) event.getY(), 0, 0)) {
                     movingPlayer = true;
                 }
                 break;
