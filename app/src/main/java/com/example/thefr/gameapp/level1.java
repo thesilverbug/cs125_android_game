@@ -121,7 +121,7 @@ public class level1 extends View {
         int maxPersonY = canvasHeight - person[0].getHeight() * 3;
 
         canvas.drawCircle(blueX, blueY, 60, bluePaint);
-        if (hitBallChecker(blueX, blueY, 30, 30) && check) {
+        if (hitBallChecker(blueX, blueY, 30, 30) && check && lifeCounter > 0) {
             check = false;
             Toast.makeText(getContext(), "Level1 Clear", Toast.LENGTH_SHORT).show();
 

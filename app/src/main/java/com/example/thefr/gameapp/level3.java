@@ -252,7 +252,7 @@ public class level3 extends View {
 
         canvas.drawCircle(blueX, blueY, 60, bluePaint);
 
-        if (hitBallChecker(blueX, blueY, 30, 30) && check) {
+        if (hitBallChecker(blueX, blueY, 30, 30) && check && lifeCounter > 0) {
             check = false;
             Toast.makeText(getContext(), "Level3 Clear", Toast.LENGTH_SHORT).show();
 
