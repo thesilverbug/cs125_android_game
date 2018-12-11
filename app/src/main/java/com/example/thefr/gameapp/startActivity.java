@@ -25,15 +25,19 @@ public class startActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(startActivity.this, MainActivity.class);
                 startActivity(mainIntent);
 
-                bgm.start();
-                bgm.setLooping(true);
+//                bgm.start();
+//                bgm.setLooping(true);
 
             }
         });
         if (bgm == null) {
             bgm = MediaPlayer.create(this, R.raw.scary);
         }
+        bgm.setVolume(0.3f,0.3f);
         bgm.start();
         bgm.setLooping(true);
+        if (Clear.bgm != null) {
+            Clear.bgm.stop();
+        }
     }
 }

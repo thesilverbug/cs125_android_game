@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Clear">
+    android:background="@drawable/hitbus"
+    tools:context=".GameOverBus">
 
     <TextView
-        android:id="@+id/gameClear"
+        android:id="@+id/gameOver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
-        android:text="Game Clear!"
+        android:text="Game Over"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        android:textSize="65dp"
+        android:textSize="70dp"
         android:textStyle="bold" />
 
     <Button

@@ -128,6 +128,7 @@ public class level1 extends View {
             Intent nextLevel = new Intent(getContext(), Main2Activity.class);
             nextLevel.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+
             getContext().startActivity(nextLevel);
         }
 
@@ -141,7 +142,7 @@ public class level1 extends View {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverPoop.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
@@ -158,7 +159,7 @@ public class level1 extends View {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverDog.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);

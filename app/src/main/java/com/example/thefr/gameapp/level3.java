@@ -68,7 +68,7 @@ public class level3 extends View {
         ghost[1] = BitmapFactory.decodeResource(getResources(), R.drawable.ghost_front2);
         ghost[2] = BitmapFactory.decodeResource(getResources(), R.drawable.ghost_back1);
         ghost[3] = BitmapFactory.decodeResource(getResources(), R.drawable.ghost_back2);
-        road = BitmapFactory.decodeResource(getResources(), R.drawable.road);
+        road = BitmapFactory.decodeResource(getResources(), R.drawable.road_tran);
 
 
         backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.background3);
@@ -80,7 +80,7 @@ public class level3 extends View {
         greenPaint.setColor(Color.TRANSPARENT);
         greenPaint.setAntiAlias(false);
 
-        redPaint.setColor(Color.RED);
+        redPaint.setColor(Color.TRANSPARENT);
         redPaint.setAntiAlias(false);
 
         bluePaint.setColor(Color.BLUE);
@@ -143,7 +143,7 @@ public class level3 extends View {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverBus.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
@@ -158,7 +158,7 @@ public class level3 extends View {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverHole.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);

@@ -157,7 +157,7 @@ public class level4 extends View {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverBus.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
@@ -172,7 +172,7 @@ public class level4 extends View {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverBus.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
@@ -187,7 +187,7 @@ public class level4 extends View {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverRedLight.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
@@ -299,8 +299,9 @@ public class level4 extends View {
             check = false;
             Toast.makeText(getContext(), "Game Clear", Toast.LENGTH_SHORT).show();
 
-            Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+            Intent gameOverIntent = new Intent(getContext(), Clear.class);
             gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Clear.bgm = null;
 
             getContext().startActivity(gameOverIntent);
         }

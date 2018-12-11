@@ -7,17 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class GameOver1 extends AppCompatActivity {
+public class GameOverRedLight extends AppCompatActivity {
     private Button startGameAgain;
     MediaPlayer bgm;
-    static MediaPlayer bgm2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_game_over1);
-
+        setContentView(R.layout.activity_game_over_red_light);
         if(bgm == null) {
             bgm = MediaPlayer.create(this, R.raw.man_scream);
         }
@@ -25,22 +21,16 @@ public class GameOver1 extends AppCompatActivity {
         if (startActivity.bgm != null) {
             startActivity.bgm.stop();
         }
-//        if (GameOver1.bgm2 != null) {
-//            GameOver1.bgm2.stop();
-//        }
 
         startGameAgain = (Button) findViewById(R.id.play_again_btn);
         startGameAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(GameOver1.this, startActivity.class);
-//                bgm2 = MediaPlayer.create(GameOver1.this, R.raw.scary);
-//                bgm2.start();
-//                bgm2.setLooping(true);
+                Intent mainIntent = new Intent(GameOverRedLight.this, startActivity.class);
+
                 startActivity.bgm = null;
                 startActivity(mainIntent);
             }
         });
-
     }
 }

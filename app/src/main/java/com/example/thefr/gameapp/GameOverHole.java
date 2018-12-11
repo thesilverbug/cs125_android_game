@@ -7,17 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class GameOver1 extends AppCompatActivity {
+public class GameOverHole extends AppCompatActivity {
     private Button startGameAgain;
     MediaPlayer bgm;
     static MediaPlayer bgm2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_game_over1);
-
+        setContentView(R.layout.activity_game_over_hole);
         if(bgm == null) {
             bgm = MediaPlayer.create(this, R.raw.man_scream);
         }
@@ -33,14 +30,14 @@ public class GameOver1 extends AppCompatActivity {
         startGameAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(GameOver1.this, startActivity.class);
-//                bgm2 = MediaPlayer.create(GameOver1.this, R.raw.scary);
+                Intent mainIntent = new Intent(GameOverHole.this, startActivity.class);
+//                bgm2 = MediaPlayer.create(GameOverHole.this, R.raw.scary);
 //                bgm2.start();
 //                bgm2.setLooping(true);
                 startActivity.bgm = null;
                 startActivity(mainIntent);
             }
         });
-
     }
+
 }

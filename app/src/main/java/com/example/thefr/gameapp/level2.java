@@ -31,9 +31,22 @@ public class level2 extends View {
     private int darkY;
     private int personX;
     private int personY;
-//    private int fishSpeed;
+
 
     private int canvasWidth, canvasHeight;
+
+    private int fence1_x;
+    private int fence1_y;
+    private int fence2_x;
+    private int fence2_y;
+    private int fence3_x;
+    private int fence3_y;
+    private int fence4_x;
+    private int fence4_y;
+    private int fence5_x;
+    private int fence5_y;
+    private int fence6_x;
+    private int fence6_y;
 
 //    private int yellowX, yellowY;
 //    private Paint yellowPaint = new Paint();
@@ -53,7 +66,7 @@ public class level2 extends View {
 
     private Bitmap backgroundImage;
 //    private Paint scorePaint = new Paint();
-//    private Bitmap life[] = new Bitmap[2];
+
 
     public level2(Context context) {
         super(context);
@@ -61,11 +74,11 @@ public class level2 extends View {
         person[0] = BitmapFactory.decodeResource(getResources(), R.drawable.char1);
         person[1] = BitmapFactory.decodeResource(getResources(), R.drawable.char2);
         darkness = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
-        fence = BitmapFactory.decodeResource(getResources(), R.drawable.fence);
+        fence = BitmapFactory.decodeResource(getResources(), R.drawable.fence_2);
         bar = BitmapFactory.decodeResource(getResources(), R.drawable.bar_tran);
         h_bar = BitmapFactory.decodeResource(getResources(), R.drawable.h_bar_tran);
 
-        backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.background2);
+        backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.background22);
 
 
 //        yellowPaint.setColor(Color.TRANSPARENT);
@@ -94,15 +107,30 @@ public class level2 extends View {
 //        yellowX = 400;
 //        yellowY = 400;
 
+        fence1_x = -150;
+        fence1_y = 320;
+        fence2_x = 800;
+        fence2_y = 320;
+        fence3_x = 208;
+        fence3_y = 685;
+        fence4_x = 208;
+        fence4_y = 1050;
+        fence5_x = -140;
+        fence5_y = 1420;
+        fence6_x = 820;
+        fence6_y = 710;
+
         blueX = 50;
-        blueY = 1800;
+        blueY = 1600;
+
+
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(backgroundImage, 0, -70, null);
+        canvas.drawBitmap(backgroundImage, 0, -40, null);
         if (flow > 4) {
             flow = 0;
         }
@@ -112,92 +140,92 @@ public class level2 extends View {
             canvas.drawBitmap(person[0], personX, personY, null);
         }
         flow++;
-        canvas.drawBitmap(fence, 0, -70, null);
+        canvas.drawBitmap(fence, 0, -40, null);
 
-        canvas.drawBitmap(bar, -125, 380, null);
-        if (hitBallChecker(-125+bar.getWidth()/2, 380+bar.getHeight()/2, 320, 2)) {
+        canvas.drawBitmap(bar, fence1_x, fence1_y, null);
+        if (hitBallChecker(fence1_x+bar.getWidth()/2, fence1_y+bar.getHeight()/2, bar.getWidth()/2, 1)) {
             lifeCounter--;
 
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverFence.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
 
             }
         }
-        canvas.drawBitmap(bar, 800, 380, null);
-        if (hitBallChecker(800+bar.getWidth()/2, 380+bar.getHeight()/2, 320, 2)) {
+        canvas.drawBitmap(bar, fence2_x, fence2_y, null);
+        if (hitBallChecker(fence2_x+bar.getWidth()/2, fence2_y+bar.getHeight()/2, bar.getWidth()/2, 1)) {
             lifeCounter--;
 
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverFence.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
 
             }
         }
-        canvas.drawBitmap(bar, 208, 740, null);
-        if (hitBallChecker(208+bar.getWidth()/2, 740+bar.getHeight()/2, 320, 2)) {
+        canvas.drawBitmap(bar, fence3_x, fence3_y, null);
+        if (hitBallChecker(fence3_x+bar.getWidth()/2, fence3_y+bar.getHeight()/2, bar.getWidth()/2, 1)) {
             lifeCounter--;
 
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverFence.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
 
             }
         }
-        canvas.drawBitmap(bar, 208, 1100, null);
-        if (hitBallChecker(208+bar.getWidth()/2, 1100+bar.getHeight()/2, 320, 2)) {
+        canvas.drawBitmap(bar, fence4_x, fence4_y, null);
+        if (hitBallChecker(fence4_x+bar.getWidth()/2, fence4_y+bar.getHeight()/2, bar.getWidth()/2, 1)) {
             lifeCounter--;
 
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverFence.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
 
             }
         }
-        canvas.drawBitmap(bar, -45, 1460, null);
-        if (hitBallChecker(-45+bar.getWidth()/2, 1460+bar.getHeight()/2, 320, 2)) {
+        canvas.drawBitmap(bar, fence5_x, fence5_y, null);
+        if (hitBallChecker(fence5_x+bar.getWidth()/2, fence5_y+bar.getHeight()/2, bar.getWidth()/2, 1)) {
             lifeCounter--;
 
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverFence.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
 
             }
         }
-        canvas.drawBitmap(h_bar, 893, 760, null);
-        if (hitBallChecker(893+h_bar.getWidth()/2, 760+h_bar.getHeight()/2, 1, 550)) {
+        canvas.drawBitmap(h_bar, fence6_x, fence6_y, null);
+        if (hitBallChecker(fence6_x+h_bar.getWidth()/2, fence6_y+h_bar.getHeight()/2, h_bar.getWidth()/2, h_bar.getHeight()/2)) {
             lifeCounter--;
 
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
-                Intent gameOverIntent = new Intent(getContext(), GameOver1.class);
+                Intent gameOverIntent = new Intent(getContext(), GameOverFence.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 getContext().startActivity(gameOverIntent);
@@ -236,7 +264,7 @@ public class level2 extends View {
     }
     //
     public boolean hitBallChecker(int x, int y, int width, int height) {
-        if (personX < x+width && x-width < (personX + person[0].getWidth()) && personY < y+height && y-height < (personY + person[0].getHeight())) {
+        if (personX < x+width && x-width < (personX + person[0].getWidth()*9/10) && personY < y+height && y-height < (personY + person[0].getHeight())) {
             return true;
         }
         return false;
