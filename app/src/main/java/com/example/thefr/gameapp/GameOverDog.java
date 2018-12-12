@@ -46,6 +46,7 @@ public class GameOverDog extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mainIntent = new Intent(GameOverDog.this, startActivity.class);
                 startActivity.bgm = null;
+                startActivity.fail += 1;
                 startActivity(mainIntent);
                 finish();
             }

@@ -4,20 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/black"
     tools:context=".startActivity">
+
+    <ImageSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageChanger"
+        />
 
     <TextView
         android:id="@+id/haunted_house_escape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
         android:text="Haunted Park Escape"
         android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
         android:textSize="62dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/start_btn"

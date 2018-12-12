@@ -15,14 +15,11 @@ import android.widget.Toast;
 
 public class gameClear extends View {
 
-
-
     int flow = 0;
     private Bitmap backgroundImage;
     private Bitmap credit;
     private Bitmap button;
     private Bitmap ending;
-
 
     private int buttonX, buttonY;
     private int creditY;
@@ -30,7 +27,6 @@ public class gameClear extends View {
 
     public gameClear(Context context) {
         super(context);
-
 
 
         backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.black);
@@ -41,8 +37,6 @@ public class gameClear extends View {
         creditY = 1000;
         buttonX = 0;
         buttonY = -500;
-
-
     }
 
     @Override
