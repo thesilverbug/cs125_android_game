@@ -73,6 +73,7 @@ public class gameClear extends View {
                     Intent gameOverIntent = new Intent(getContext(), startActivity.class);
                     gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity.bgm = null;
+                    startActivity.fail = 0;
                     getContext().startActivity(gameOverIntent);
                 }
                 break;

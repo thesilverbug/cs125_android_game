@@ -22,18 +22,13 @@ public class GameOverFence extends AppCompatActivity {
         if (startActivity.bgm != null) {
             startActivity.bgm.stop();
         }
-//        if (GameOver1.bgm2 != null) {
-//            GameOver1.bgm2.stop();
-//        }
 
         startGameAgain = (Button) findViewById(R.id.play_again_btn);
         startGameAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mainIntent = new Intent(GameOverFence.this, startActivity.class);
-//                bgm2 = MediaPlayer.create(GameOverFence.this, R.raw.scary);
-//                bgm2.start();
-//                bgm2.setLooping(true);
+                startActivity.fail += 1;
                 startActivity.bgm = null;
                 startActivity(mainIntent);
                 finish();

@@ -29,6 +29,7 @@ public class GameOverRedLight extends AppCompatActivity {
                 Intent mainIntent = new Intent(GameOverRedLight.this, startActivity.class);
 
                 startActivity.bgm = null;
+                startActivity.fail += 1;
                 startActivity(mainIntent);
                 finish();
             }

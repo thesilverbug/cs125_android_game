@@ -34,10 +34,9 @@ public class GameOver1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mainIntent = new Intent(GameOver1.this, startActivity.class);
-//                bgm2 = MediaPlayer.create(GameOver1.this, R.raw.scary);
-//                bgm2.start();
-//                bgm2.setLooping(true);
+
                 startActivity.bgm = null;
+                startActivity.fail += 1;
                 startActivity(mainIntent);
                 finish();
             }
