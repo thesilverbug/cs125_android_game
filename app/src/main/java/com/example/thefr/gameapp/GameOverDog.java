@@ -8,39 +8,52 @@ import android.view.View;
 import android.widget.Button;
 
 public class GameOverDog extends AppCompatActivity {
+    /**
+     * Play again button.
+     */
     private Button startGameAgain;
+    /**
+     * background music.
+     */
     MediaPlayer bgm;
-    static MediaPlayer bgm2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over_dog);
-
+        /**
+         * if there is no background music in this Activity, Play man_scream from raw.
+         */
         if(bgm == null) {
             bgm = MediaPlayer.create(this, R.raw.man_scream);
         }
         bgm.start();
+        /**
+         * if startActivity's background music is playing, stop it.
+         */
         if (startActivity.bgm != null) {
             startActivity.bgm.stop();
         }
-//        if (GameOver1.bgm2 != null) {
-//            GameOver1.bgm2.stop();
-//        }
-
+        /**
+         * Activate when play again button is press.
+         */
         startGameAgain = (Button) findViewById(R.id.play_again_btn);
         startGameAgain.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Go back to startActivity(starting page) and exit current Activity.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent mainIntent = new Intent(GameOverDog.this, startActivity.class);
-//                bgm2 = MediaPlayer.create(GameOverDog.this, R.raw.scary);
-//                bgm2.start();
-//                bgm2.setLooping(true);
                 startActivity.bgm = null;
                 startActivity(mainIntent);
                 finish();
             }
         });
     }
+    /**
+     * when back button is press, initialize background music to none.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
