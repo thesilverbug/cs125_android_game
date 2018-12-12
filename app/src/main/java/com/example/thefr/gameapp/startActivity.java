@@ -10,16 +10,36 @@ import android.widget.Button;
 import static java.security.AccessController.getContext;
 
 public class startActivity extends AppCompatActivity {
+    /**
+     * Background music.
+     */
     static MediaPlayer bgm;
+    /**
+     * Start button.
+     */
     private Button start;
+
+    /**
+     * I'm not 100% sure, but I believe onCreate method is like main method in java,
+     * which execute code for android activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-
+        /**
+         * Used button that I created from startActivity xml.
+         */
         start = (Button) findViewById(R.id.start_btn);
+        /**
+         * Activate when button is clicked.
+         */
         start.setOnClickListener(new View.OnClickListener() {
+            /**
+             * When start button is press, goto next(Main) activity.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent mainIntent = new Intent(startActivity.this, MainActivity.class);
@@ -29,16 +49,26 @@ public class startActivity extends AppCompatActivity {
 
             }
         });
+        /**
+         * if there is no background music, play background music.
+         */
         if (bgm == null) {
             bgm = MediaPlayer.create(this, R.raw.scary);
         }
         bgm.setVolume(0.3f,0.3f);
         bgm.start();
         bgm.setLooping(true);
+        /**
+         * if background music from Clear Activity is still playing, stop it.
+         */
         if (Clear.bgm != null) {
             Clear.bgm.stop();
         }
     }
+
+    /**
+     * when back button is press, stop background music.
+     */
     public void onBackPressed() {
         super.onBackPressed();
         if (bgm != null) {
