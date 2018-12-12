@@ -37,4 +37,11 @@ public class Main2Activity extends AppCompatActivity {
         }, 0, Interval);
 
     }
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (startActivity.bgm != null) {
+            startActivity.bgm.stop();
+            startActivity.bgm = null;
+        }
+    }
 }

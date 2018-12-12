@@ -36,7 +36,12 @@ public class GameOverFence extends AppCompatActivity {
 //                bgm2.setLooping(true);
                 startActivity.bgm = null;
                 startActivity(mainIntent);
+                finish();
             }
         });
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity.bgm = null;
     }
 }

@@ -47,4 +47,11 @@ public class Clear extends AppCompatActivity {
         }, 0, Interval);
 
     }
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (bgm != null) {
+            bgm.stop();
+            bgm = null;
+        }
+    }
 }

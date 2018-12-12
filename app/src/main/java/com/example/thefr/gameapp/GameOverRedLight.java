@@ -30,7 +30,12 @@ public class GameOverRedLight extends AppCompatActivity {
 
                 startActivity.bgm = null;
                 startActivity(mainIntent);
+                finish();
             }
         });
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity.bgm = null;
     }
 }

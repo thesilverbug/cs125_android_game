@@ -15,7 +15,7 @@
         android:layout_marginTop="50dp"
         android:text="Haunted Park Escape"
         android:textAlignment="center"
-        android:textSize="70dp"
+        android:textSize="62dp"
         android:textStyle="bold"
         />
 

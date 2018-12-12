@@ -24,9 +24,8 @@ public class startActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mainIntent = new Intent(startActivity.this, MainActivity.class);
                 startActivity(mainIntent);
+                finish();
 
-//                bgm.start();
-//                bgm.setLooping(true);
 
             }
         });
@@ -38,6 +37,13 @@ public class startActivity extends AppCompatActivity {
         bgm.setLooping(true);
         if (Clear.bgm != null) {
             Clear.bgm.stop();
+        }
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (bgm != null) {
+            bgm.stop();
+            bgm = null;
         }
     }
 }

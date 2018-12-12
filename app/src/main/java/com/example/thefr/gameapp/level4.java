@@ -22,7 +22,7 @@ public class level4 extends View {
     boolean check = true;
 
     private Bitmap person[] = new Bitmap[2];
-    private Bitmap darkness;
+    private Bitmap darkness[] = new Bitmap[2];
     private Bitmap ghost[] = new Bitmap[4];
     private Bitmap street1;
     private Bitmap street2;
@@ -34,7 +34,7 @@ public class level4 extends View {
     private int darkY;
     private int personX;
     private int personY;
-//    private int fishSpeed;
+
 
     private int canvasWidth, canvasHeight;
 
@@ -51,11 +51,12 @@ public class level4 extends View {
     private Paint bluePaint = new Paint();
 
     private int lifeCounter;
+    protected static boolean flashLight;
 
     private boolean turn1 = true;
     private boolean turn2 = true;
 
-//    private boolean touch = false;
+
 
     private Bitmap backgroundImage;
     private Bitmap backgroundImage_light;
@@ -67,7 +68,8 @@ public class level4 extends View {
 
         person[0] = BitmapFactory.decodeResource(getResources(), R.drawable.char1);
         person[1] = BitmapFactory.decodeResource(getResources(), R.drawable.char2);
-        darkness = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
+        darkness[0] = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
+        darkness[1] = BitmapFactory.decodeResource(getResources(), R.drawable.darkness_flashlight);
         ghost[0] = BitmapFactory.decodeResource(getResources(), R.drawable.ghost_front1);
         ghost[1] = BitmapFactory.decodeResource(getResources(), R.drawable.ghost_front2);
         ghost[2] = BitmapFactory.decodeResource(getResources(), R.drawable.ghost_back1);
@@ -96,10 +98,15 @@ public class level4 extends View {
 
         personX = 80-person[0].getWidth()/2;
         personY = 1500-person[0].getHeight()/2;
-        darkX = 80-darkness.getWidth()/2;
-        darkY = 1500-darkness.getHeight()/2;
-        //score = 0;
-        lifeCounter = 2;
+        darkX = 80-darkness[0].getWidth()/2;
+        darkY = 1500-darkness[0].getHeight()/2;
+
+        lifeCounter = 1;
+        if (level3.flashLight) {
+            flashLight = true;
+        } else {
+            flashLight = false;
+        }
 
         greenX = 100;
         greenY = 100;
@@ -297,6 +304,8 @@ public class level4 extends View {
 
         if (hitBallChecker(blueX, blueY, 30, 30) && check && lifeCounter > 0) {
             check = false;
+            personX = 5000;
+            personY = 5000;
             Toast.makeText(getContext(), "Game Clear", Toast.LENGTH_SHORT).show();
 
             Intent gameOverIntent = new Intent(getContext(), Clear.class);
@@ -311,7 +320,11 @@ public class level4 extends View {
 
 
 
-        canvas.drawBitmap(darkness, darkX, darkY, null);
+        if (!flashLight) {
+            canvas.drawBitmap(darkness[0], darkX, darkY, null);
+        } else {
+            canvas.drawBitmap(darkness[1], darkX, darkY, null);
+        }
 
     }
     //
@@ -340,8 +353,8 @@ public class level4 extends View {
                 if (movingPlayer) {
                     personX = (int) event.getX() - person[0].getWidth() / 2;
                     personY = (int) event.getY() - person[0].getHeight() / 2;
-                    darkX = (int) event.getX() - darkness.getWidth() / 2;
-                    darkY = (int) event.getY() - darkness.getHeight() / 2;
+                    darkX = (int) event.getX() - darkness[0].getWidth() / 2;
+                    darkY = (int) event.getY() - darkness[0].getHeight() / 2;
                 }
                 break;
             case MotionEvent.ACTION_UP:

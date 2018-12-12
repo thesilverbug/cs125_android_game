@@ -16,53 +16,76 @@ import android.widget.Toast;
 public class level1 extends View {
 
     private boolean movingPlayer = false;
-
-    int flow = 0;
-    boolean check = true;
-
+    /**
+     * Counting time interval. It act as a trigger for loading different image, creating animation effect.
+     */
+    int timeCount = 0;
+    /**
+     * Check whether character reach portal once.
+     */
+    boolean portalCheck = true;
+    /**
+     * Variable that store image from drawable.
+     */
     private Bitmap person[] = new Bitmap[2];
-    private Bitmap darkness;
+    private Bitmap darkness[] = new Bitmap[2];
     private Bitmap poop;
     private Bitmap dog;
-
+    private Bitmap flash;
+    private Bitmap backgroundImage;
+    /**
+     * Coordinate variable for character.
+     */
     private int darkX;
     private int darkY;
     private int personX;
     private int personY;
-
-
-    private int canvasWidth, canvasHeight;
-
+    /**
+     * Coordinate variable for obstacle and portal(blue).
+     */
     private int yellowX, yellowY;
     private Paint yellowPaint = new Paint();
 
     private int greenX, greenY;
     private Paint greenPaint = new Paint();
 
-    private int redX, redY, redSpeed = 25;
+    private int redX, redY;
     private Paint redPaint = new Paint();
 
     private int blueX, blueY;
     private Paint bluePaint = new Paint();
 
-    private int score, lifeCounter;
+    /**
+     * Number of life in this game. if life reach 0, game will be over.
+     */
+    private int lifeCounter;
+    /**
+     * Checking whether user have special item, flash light.
+     */
+    protected static boolean flashLight;
 
-//    private boolean touch = false;
 
-    private Bitmap backgroundImage;
-
-
+    /**
+     * Constructor for level1. It define all the variable that will be use.
+     * @param context
+     */
     public level1(Context context) {
         super(context);
-
+        /**
+         * Assign image to each variable.
+         */
         person[0] = BitmapFactory.decodeResource(getResources(), R.drawable.char1);
         person[1] = BitmapFactory.decodeResource(getResources(), R.drawable.char2);
-        darkness = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
+        darkness[0] = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
+        darkness[1] = BitmapFactory.decodeResource(getResources(), R.drawable.darkness_flashlight);
         poop = BitmapFactory.decodeResource(getResources(), R.drawable.poop);
         dog = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
         backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+        flash = BitmapFactory.decodeResource(getResources(), R.drawable.flashlight);
 
-
+        /**
+         * Set visibility of obstacle hit checkers.
+         */
         yellowPaint.setColor(Color.TRANSPARENT);
         yellowPaint.setAntiAlias(false);
 
@@ -76,13 +99,25 @@ public class level1 extends View {
         bluePaint.setAntiAlias(false);
 
 
+        /**
+         * initial coordinate for character.
+         */
         personX = 740-person[0].getWidth()/2;
         personY = 1500-person[0].getHeight()/2;
-        darkX = 740-darkness.getWidth()/2;
-        darkY = 1500-darkness.getHeight()/2;
-        //score = 0;
+        darkX = 740-darkness[0].getWidth()/2;
+        darkY = 1500-darkness[0].getHeight()/2;
+        /**
+         * initial access to flash light.
+         */
+        flashLight = false;
+        /**
+         * number of life given.
+         */
         lifeCounter = 1;
 
+        /**
+         * initial coordinate for obstacles.
+         */
         greenX = 300;
         greenY = 900;
 
@@ -91,53 +126,62 @@ public class level1 extends View {
 
         blueX = 50;
         blueY = 50;
+
+        redX = 3200;
+        redY = 1400;
     }
 
+    /**
+     * Where coding and image meet. upload and update image by time interval given from MainActivity.
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        /**
+         * Set background first, so all other images would be front.
+         */
         canvas.drawBitmap(backgroundImage, 0, 0, null);
-        if (flow > 4) {
-            flow = 0;
+        /**
+         * Setting trigger for image change in character.
+         */
+        if (timeCount > 4) {
+            timeCount = 0;
         }
-        if (flow > 2) {
+        if (timeCount > 2) {
             canvas.drawBitmap(person[1], personX, personY, null);
         } else {
             canvas.drawBitmap(person[0], personX, personY, null);
         }
-        flow++;
+        timeCount++;
 
-
-
-
-        canvasWidth = canvas.getWidth();
-        canvasHeight = canvas.getHeight();
-
-
-//        canvas.drawBitmap(backgroundImage, 0, 0, null);
-//
-        int minPersonY = person[0].getHeight();
-        int maxPersonY = canvasHeight - person[0].getHeight() * 3;
-
+        /**
+         * create portal.
+         */
         canvas.drawCircle(blueX, blueY, 60, bluePaint);
-        if (hitBallChecker(blueX, blueY, 30, 30) && check && lifeCounter > 0) {
-            check = false;
+        /**
+         * When character hit portal, go to next level.
+         */
+        if (hitBallChecker(blueX, blueY, 30, 30) && portalCheck && lifeCounter > 0) {
+            portalCheck = false;
             Toast.makeText(getContext(), "Level1 Clear", Toast.LENGTH_SHORT).show();
 
             Intent nextLevel = new Intent(getContext(), Main2Activity.class);
             nextLevel.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-
             getContext().startActivity(nextLevel);
         }
 
-
+        /**
+         * create obstacle poop and hit checker for poop.
+         */
         canvas.drawBitmap(poop, yellowX - poop.getWidth()/2, yellowY - poop.getHeight()/2, null);
         canvas.drawCircle(yellowX, yellowY, 60, yellowPaint);
+        /**
+         * if character hit hit checker for poop, goto GameOverPoop activity.
+         */
         if (hitBallChecker(yellowX, yellowY, 30, 30)) {
             lifeCounter--;
-            yellowX = -100;
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
@@ -149,12 +193,16 @@ public class level1 extends View {
 
             }
         }
-
+        /**
+         * create obstacle dog and its hit checker.
+         */
         canvas.drawBitmap(dog, greenX - dog.getWidth()/2, greenY - dog.getHeight()/2, null);
         canvas.drawCircle(greenX, greenY, 100, greenPaint);
+        /**
+         * if character hit hit checker for dog, go to GameOverDog activity.
+         */
         if (hitBallChecker(greenX, greenY, 50, 50)) {
             lifeCounter--;
-            greenX = -100;
             if (lifeCounter == 0) {
 
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
@@ -166,23 +214,36 @@ public class level1 extends View {
 
             }
         }
-
-
-        redX = redX - redSpeed/100;
-        if (hitBallChecker(redX, redY, 15, 15)) {
-            lifeCounter--;
-            redX = -100;
-        }
-        if (redX < 0) {
-            redX = canvasWidth + 21;
-            redY = (int) Math.floor(Math.random() * (maxPersonY - minPersonY)) + minPersonY;
-        }
+        /**
+         * create flash light and its hit checker.
+         */
+        canvas.drawBitmap(flash, redX - flash.getWidth()/2, redY - flash.getHeight()/2, null);
         canvas.drawCircle(redX, redY, 30, redPaint);
-
-
-        canvas.drawBitmap(darkness, darkX, darkY, null);
+        /**
+         * if character hit flash light hit checker, update the flash light owning status.
+         */
+        if (hitBallChecker(redX, redY, 15, 15)) {
+            redX = -100;
+            flashLight = true;
+        }
+        /**
+         * Flash light ownership checker. Depend on the result, range that character could see will vary.
+         */
+        if (flashLight == false) {
+            canvas.drawBitmap(darkness[0], darkX, darkY, null);
+        } else {
+            canvas.drawBitmap(darkness[1], darkX, darkY, null);
+        }
     }
-//
+
+    /**
+     * hit checker for any object.
+     * @param x Object's x coordinate.
+     * @param y Object's y coordinate.
+     * @param width Object's half width.
+     * @param height Object's half height.
+     * @return return true if object is touching character, else return false.
+     */
     public boolean hitBallChecker(int x, int y, int width, int height) {
         if (personX < x+width && x-width < (personX + person[0].getWidth()) && personY < y+height && y-height < (personY + person[0].getHeight())) {
             return true;
@@ -190,6 +251,13 @@ public class level1 extends View {
         return false;
     }
 
+    /**
+     * Set up the click and drag feature for moving character. character will only more when user
+     * click within acceptable range from character. Character will only move when user press down
+     * on character.
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -202,18 +270,15 @@ public class level1 extends View {
                 if (movingPlayer) {
                     personX = (int) event.getX() - person[0].getWidth() / 2;
                     personY = (int) event.getY() - person[0].getHeight() / 2;
-                    darkX = (int) event.getX() - darkness.getWidth() / 2;
-                    darkY = (int) event.getY() - darkness.getHeight() / 2;
+                    darkX = (int) event.getX() - darkness[0].getWidth() / 2;
+                    darkY = (int) event.getY() - darkness[0].getHeight() / 2;
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 movingPlayer = false;
                 break;
         }
-
-
         return true;
     }
-
 }
 

@@ -21,10 +21,11 @@ public class level2 extends View {
     boolean check = true;
 
     private Bitmap person[] = new Bitmap[2];
-    private Bitmap darkness;
+    private Bitmap darkness[] = new Bitmap[2];
     private Bitmap fence;
     private Bitmap bar;
     private Bitmap h_bar;
+    private Bitmap flash;
 
 
     private int darkX;
@@ -33,7 +34,7 @@ public class level2 extends View {
     private int personY;
 
 
-    private int canvasWidth, canvasHeight;
+    protected static boolean flashLight;
 
     private int fence1_x;
     private int fence1_y;
@@ -54,8 +55,8 @@ public class level2 extends View {
 //    private int greenX, greenY;
 //    private Paint greenPaint = new Paint();
 //
-//    private int redX, redY, redSpeed = 25;
-//    private Paint redPaint = new Paint();
+    private int redX, redY, redSpeed;
+    private Paint redPaint = new Paint();
 
     private int blueX, blueY;
     private Paint bluePaint = new Paint();
@@ -73,39 +74,35 @@ public class level2 extends View {
 
         person[0] = BitmapFactory.decodeResource(getResources(), R.drawable.char1);
         person[1] = BitmapFactory.decodeResource(getResources(), R.drawable.char2);
-        darkness = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
+        darkness[0] = BitmapFactory.decodeResource(getResources(), R.drawable.darkness);
+        darkness[1] = BitmapFactory.decodeResource(getResources(), R.drawable.darkness_flashlight);
         fence = BitmapFactory.decodeResource(getResources(), R.drawable.fence_2);
         bar = BitmapFactory.decodeResource(getResources(), R.drawable.bar_tran);
         h_bar = BitmapFactory.decodeResource(getResources(), R.drawable.h_bar_tran);
-
+        flash = BitmapFactory.decodeResource(getResources(), R.drawable.flashlight);
         backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.background22);
 
-
-//        yellowPaint.setColor(Color.TRANSPARENT);
-//        yellowPaint.setAntiAlias(false);
-//
-//        greenPaint.setColor(Color.TRANSPARENT);
-//        greenPaint.setAntiAlias(false);
-//
-//        redPaint.setColor(Color.TRANSPARENT);
-//        redPaint.setAntiAlias(false);
 
         bluePaint.setColor(Color.BLUE);
         bluePaint.setAntiAlias(false);
 
+        redPaint.setColor(Color.TRANSPARENT);
+        redPaint.setAntiAlias(false);
+
 
         personX = 140-person[0].getWidth()/2;
         personY = 150-person[0].getHeight()/2;
-        darkX = 140-darkness.getWidth()/2;
-        darkY = 150-darkness.getHeight()/2;
-        //score = 0;
-        lifeCounter = 2;
+        darkX = 140-darkness[0].getWidth()/2;
+        darkY = 150-darkness[0].getHeight()/2;
 
-//        greenX = 300;
-//        greenY = 900;
-//
-//        yellowX = 400;
-//        yellowY = 400;
+        if (level1.flashLight) {
+            flashLight = true;
+        } else {
+            flashLight = false;
+        }
+
+        lifeCounter = 1;
+
 
         fence1_x = -150;
         fence1_y = 320;
@@ -122,6 +119,9 @@ public class level2 extends View {
 
         blueX = 50;
         blueY = 1600;
+
+        redX = 550;
+        redY = 870;
 
 
     }
@@ -235,13 +235,6 @@ public class level2 extends View {
 
 
 
-        canvasWidth = canvas.getWidth();
-        canvasHeight = canvas.getHeight();
-
-
-//
-        int minPersonY = person[0].getHeight();
-        int maxPersonY = canvasHeight - person[0].getHeight() * 3;
 
         canvas.drawCircle(blueX, blueY, 60, bluePaint);
 
@@ -255,11 +248,20 @@ public class level2 extends View {
             getContext().startActivity(gameOverIntent);
         }
 
+        if (hitBallChecker(redX, redY, 15, 15)) {
+            redX = -100;
+            flashLight = true;
+        }
+        canvas.drawBitmap(flash, redX - flash.getWidth()/2, redY - flash.getHeight()/2, null);
+        canvas.drawCircle(redX, redY, 30, redPaint);
 
 
 
-
-        canvas.drawBitmap(darkness, darkX, darkY, null);
+        if (!flashLight) {
+            canvas.drawBitmap(darkness[0], darkX, darkY, null);
+        } else {
+            canvas.drawBitmap(darkness[1], darkX, darkY, null);
+        }
 
     }
     //
@@ -282,8 +284,8 @@ public class level2 extends View {
                 if (movingPlayer) {
                     personX = (int) event.getX() - person[0].getWidth() / 2;
                     personY = (int) event.getY() - person[0].getHeight() / 2;
-                    darkX = (int) event.getX() - darkness.getWidth() / 2;
-                    darkY = (int) event.getY() - darkness.getHeight() / 2;
+                    darkX = (int) event.getX() - darkness[0].getWidth() / 2;
+                    darkY = (int) event.getY() - darkness[0].getHeight() / 2;
                 }
                 break;
             case MotionEvent.ACTION_UP:
