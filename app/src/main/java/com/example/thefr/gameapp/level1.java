@@ -45,6 +45,9 @@ public class level1 extends View {
      */
     private int yellowX, yellowY;
     private Paint yellowPaint = new Paint();
+    private int yellow2X, yellow2Y;
+    private int yellow3X, yellow3Y;
+
 
     private int greenX, greenY;
     private Paint greenPaint = new Paint();
@@ -89,6 +92,7 @@ public class level1 extends View {
         yellowPaint.setColor(Color.TRANSPARENT);
         yellowPaint.setAntiAlias(false);
 
+
         greenPaint.setColor(Color.TRANSPARENT);
         greenPaint.setAntiAlias(false);
 
@@ -123,6 +127,10 @@ public class level1 extends View {
 
         yellowX = 400;
         yellowY = 400;
+        yellow2X = 900;
+        yellow2Y = 800;
+        yellow3X = 550;
+        yellow3Y = 1200;
 
         blueX = 50;
         blueY = 50;
@@ -177,10 +185,14 @@ public class level1 extends View {
          */
         canvas.drawBitmap(poop, yellowX - poop.getWidth()/2, yellowY - poop.getHeight()/2, null);
         canvas.drawCircle(yellowX, yellowY, 60, yellowPaint);
+        canvas.drawBitmap(poop, yellow2X - poop.getWidth()/2, yellow2Y - poop.getHeight()/2, null);
+        canvas.drawCircle(yellow2X, yellow2Y, 60, yellowPaint);
+        canvas.drawBitmap(poop, yellow3X - poop.getWidth()/2, yellow3Y - poop.getHeight()/2, null);
+        canvas.drawCircle(yellow3X, yellow3Y, 60, yellowPaint);
         /**
          * if character hit hit checker for poop, goto GameOverPoop activity.
          */
-        if (hitBallChecker(yellowX, yellowY, 30, 30)) {
+        if (hitBallChecker(yellowX, yellowY, 30, 30) || hitBallChecker(yellow2X, yellow2Y, 30, 30)|| hitBallChecker(yellow3X, yellow3Y, 30, 30)) {
             lifeCounter--;
             if (lifeCounter == 0) {
 
